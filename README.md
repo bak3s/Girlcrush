@@ -1,4 +1,4 @@
-== Girlcrush
+# Girlcrush
 
 Version: 0.1
 Author: Daniel Baker
