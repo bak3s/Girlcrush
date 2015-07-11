@@ -19,8 +19,14 @@
         <a class="navbar-brand" href="/">Girlcrush</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><%#= link_to 'Movies', movies_path %></li>
+        <ul class="nav navbar-nav pull-right">
+          <% if !user_signed_in? %>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <li><%= link_to 'Log in', new_user_session_path %></li>
+          <% else %>
+          <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+          <% end %>
         </ul>
       </div>
     </div>
