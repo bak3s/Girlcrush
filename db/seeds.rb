@@ -34,7 +34,7 @@ Profile.create([
     gender: "male",
     biography: "This is a multiline biography",
     age: "24-29",
-    user_id: 1
+    user_id: 1tit
   },
   {
     caption: "I am a user",

@@ -1,13 +1,18 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">Crushes</h2>
+    <h2 class="panel-title">My Crushes</h2>
   </div>
   <div class="panel-body">
     <% @crushes.each do |crush| %>
     <div class="row">
       <div class="col-lg-12">
+        <%= image_tag crush.picture.url(:medium) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
         <h3 class="panel-title">Title</h3>
-        <%= link_to crush.title, user_crushes_path(crush.user_id,crush) %>
+        <%= link_to crush.title, user_crushes_path(@user.id,crush) %>
       </div>
     </div>
     <div class="row">
@@ -25,3 +30,5 @@
     <% end %>
   </div>
 </div>
+
+<%= link_to "Add New Crush", new_user_crush_path, class: 'btn btn-primary' %>
