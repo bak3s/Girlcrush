@@ -1,4 +1,5 @@
 class Crush < ActiveRecord::Base
+  # SDP: The code in crush and profile are very similar, can you think of a way to DRY this?
   belongs_to :user
 
   has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
