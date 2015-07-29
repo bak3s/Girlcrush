@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :profiles
-  resources :crushes, only: [:index]
+  resources :profiles, only: [:show]
+  resources :crushes, only: [:index,:update]
 
   devise_for :users
 
@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   resources :users do
     scope module: "users" do
       resources :crushes
+      resources :profiles
+    end
+  end
+
+  resources :crushes do
+    member do
+      put "like", to: "crushes#upvote"
+      put "dislike", to: "crushes#downvote"
     end
   end
   

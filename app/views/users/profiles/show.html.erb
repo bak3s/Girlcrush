@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= image_tag @profile.avatar.url(:thumb) %></h2>
+    <h2 class="panel-title"><%= image_tag @profile.avatar.url(:thumb) %> <%= current_user.email %> Profile</h2>
   </div>
   <div class="panel-body">
     <div class="row">
@@ -33,5 +33,6 @@
         <%= @profile.biography %>
       </div>
     </div>
+    <%= link_to 'Edit', edit_user_profile_path(current_user[:id],current_user[:id]), class: 'btn btn-default' %>
   </div>
 </div>

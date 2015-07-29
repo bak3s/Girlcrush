@@ -5,8 +5,10 @@ class CreateCrushes < ActiveRecord::Migration
       t.text :description, null: false
       t.integer :crushed, null: false, default: 0
       t.integer :user_id, null: false
+      t.string :address, null: false
 
       t.timestamps null: false
     end
+    add_index :crushes, :user_id
   end
 end

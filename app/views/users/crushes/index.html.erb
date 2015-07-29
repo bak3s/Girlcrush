@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">My Crushes</h2>
+    <h2 class="panel-title">Crushes</h2>
   </div>
   <div class="panel-body">
     <% @crushes.each do |crush| %>
@@ -12,23 +12,35 @@
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Title</h3>
-        <%= link_to crush.title, user_crushes_path(@user.id,crush) %>
+        <%= link_to crush.title, user_crushes_path(crush.user_id,crush) %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <h3 class="panel-title">Description</h3>
-        <%= crush.description %>
-      </div>
-    </div>
+
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Crushed</h3>
-        <%= crush.crushed %>
+        <%= crush.votes_for.size %>
       </div>
     </div>
+
+    <%= link_to "Crush This", like_crush_path(crush), method: :put, class: 'btn btn-primary' %>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title">Crushed by</h3>
+          <div class="list-group">
+          <% crush.votes_for.voters.each do |p| %>
+            <a class="list-group-item" href="<%= profile_path(p.profile.user_id) %>">
+              <%= image_tag p.profile.avatar.url(:thumb), class: '' %>
+              <%= p.email %>
+            </a>
+          <% end %>
+          </div>
+      </div>
+    </div>
+    
+    <%#= link_to "Downvote", dislike_crush_path(crush), method: :put %>
+
     <% end %>
   </div>
 </div>
-
-<%= link_to "Add New Crush", new_user_crush_path, class: 'btn btn-primary' %>

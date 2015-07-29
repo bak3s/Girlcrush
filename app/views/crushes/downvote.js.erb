@@ -1,0 +1,3 @@
+$('.npos').bind('ajax:success', function() {
+ $('.ncount-<%= @crush.id %>').html('<%=escape_javascript @crush.get_downvotes.size.to_s %>');
+});

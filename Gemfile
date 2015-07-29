@@ -11,6 +11,7 @@ gem 'rails',        '~> 4.2'
 gem 'rest-client',  '~> 1.8'
 gem 'sass-rails',   '~> 5.0'
 gem 'turbolinks',   '~> 2.5'
+gem 'acts_as_votable', '~> 0.10'
 
 # Add a dependency on the bootstrap gem, but only with CSS support
 gem 'twitter-bootstrap-rails', '~> 3.2'

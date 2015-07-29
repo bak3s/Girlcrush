@@ -13,9 +13,13 @@ class Users::CrushesController < ApplicationController
     @crush = Crush.new
   end
 
+  def show
+    @crush = Crush.find(params[:id])
+  end
+
   def create
-    user_id = current_user
     @crush = Crush.new(white_listed_parameters)
+    @crush.user_id = current_user.id
     if @crush.save
       flash[:notice] = 'Crush saved'
       redirect_to user_crushes_path
@@ -39,6 +43,6 @@ class Users::CrushesController < ApplicationController
   def white_listed_parameters
     params
       .require(:crush)
-      .permit(:title, :description, :crushed, :user_id, :picture)
+      .permit(:title, :description, :crushed, :user_id, :picture, :address)
   end
 end

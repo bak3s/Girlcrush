@@ -1,2 +1,52 @@
-<h1>Crushes#show</h1>
-<p>Find me in app/views/crushes/show.html.erb</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= @crush.title %></h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <%= image_tag @crush.picture.url(:medium) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <%= @crush.description %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <%= @crush.address %>
+        <hr />
+        <% built_url = @crush.build_url %>
+        <% location = @crush.process_url(built_url) %>
+        <% latlng = @crush.show_places(location) %>
+        <%= latlng[0][:lat] %>
+        <%= latlng[0][:lng] %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <%= @crush.votes_for.size %>
+      </div>
+    </div>
+
+    <%= link_to "Crush This", like_crush_path(@crush), method: :put, class: 'btn btn-primary' %>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="panel-title">Crushed by</h3>
+          <div class="list-group">
+          <% @crush.votes_for.voters.each do |p| %>
+            <a class="list-group-item" href="<%= profile_path(p.profile.user_id) %>">
+              <%= image_tag p.profile.avatar.url(:thumb), class: '' %>
+              <%= p.email %>
+            </a>
+          <% end %>
+          </div>
+      </div>
+    </div>
+    
+    <%#= link_to "Downvote", dislike_crush_path(crush), method: :put %>
+  </div>
+</div>
