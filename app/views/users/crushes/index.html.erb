@@ -1,35 +1,51 @@
-<div class="panel panel-default">
+<div class="row">
+  <div class="col-lg-12">
+      <div class="well">
+    <%= link_to 'Add Crush', new_user_crush_path, class: 'btn btn-primary' %>
+  </div>
+  </div>
+</div>
+
+<% @crushes.each do |crush| %>
+    <div class="col-md-4">
+  <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Crushes</h2>
   </div>
   <div class="panel-body">
-    <% @crushes.each do |crush| %>
+
     <div class="row">
       <div class="col-lg-12">
-        <%= image_tag crush.picture.url(:medium) %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <h3 class="panel-title">Title</h3>
-        <%= link_to crush.title, user_crush_path(crush.user_id,crush) %>
+        <h2 class="panel-title"><%= link_to crush.title, user_crush_path(crush.user_id,crush) %></h2>
       </div>
     </div>
 
+    <hr />
+
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="panel-title">Crushed</h3>
-        <%= crush.votes_for.size %>
+        <%= image_tag crush.picture.url(:full), class: 'img-responsive' %>
       </div>
     </div>
 
-    <%= link_to "Crush This", like_crush_path(crush), method: :put, class: 'btn btn-primary' %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="well">
+        <button class="btn btn-primary" type="button">
+          Crushes <span class="badge"><%= crush.votes_for.size %></span>
+        </button> 
+        <%= link_to "Crush This", like_crush_path(crush), method: :put, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
 
-    <%= link_to "Delete", user_crush_path(crush.user_id,crush), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <hr />
 
     <div class="row">
       <div class="col-lg-12">
+        
         <h3 class="panel-title">Crushed by</h3>
+        <br />
           <div class="list-group">
           <% crush.votes_for.voters.each do |p| %>
             <a class="list-group-item" href="<%= profile_path(p.profile.user_id) %>">
@@ -40,7 +56,22 @@
           </div>
       </div>
     </div>
-    <% end %>
-    <%= link_to "New Crush", new_user_crush_path, class: 'btn btn-primary' %>
+    
+    <%#= link_to "Downvote", dislike_crush_path(crush), method: :put %>
+
+    
+
+  </div>
+</div>
+</div>
+<% end %>
+
+<hr />
+
+<div class="row">
+  <div class="col-lg-12">
+      <div class="well">
+    <%= link_to 'Add Crush', new_user_crush_path, class: 'btn btn-primary' %>
+  </div>
   </div>
 </div>

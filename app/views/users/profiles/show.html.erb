@@ -9,30 +9,35 @@
         <%= @profile.caption %>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Gender</h3>
         <%= @profile.gender %>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Age</h3>
         <%= @profile.age %>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Location</h3>
         <%= @profile.location %>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Bio</h3>
         <%= @profile.biography %>
       </div>
     </div>
+    <hr />
     <%= link_to 'Edit', edit_user_profile_path(current_user[:id],current_user[:id]), class: 'btn btn-default' %>
   </div>
 </div>
