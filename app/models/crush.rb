@@ -1,12 +1,18 @@
 class Crush < ActiveRecord::Base
+  # SDP: The code in crush and profile are very similar, can you think of a way to DRY this?
   belongs_to :user
 
   acts_as_votable
 
   validates_presence_of :picture, :title, :description, :user_id, :crushed, :address
 
-  has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "missing.png"
+  has_attached_file :picture, :styles => { :full => "1200x1200", :medium => "300x300>", :thumb => "100x100>" }, :default_url => "missing.png"
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/\
+
+  include PublicActivity::Model
+  tracked
+
+  # @crush.create_activity key: 'crush.liked', owner: current_user
 
   def build_url
     pretty_address = address.downcase.tr(" ","+")

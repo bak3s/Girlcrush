@@ -3,6 +3,10 @@ class CrushesController < ApplicationController
     @crushes = Crush.paginate(page: params[:page])
   end
 
+  def show
+    @crush = Crush.find(params[:id])
+  end
+
   def upvote
     @crush = Crush.find(params[:id])
     respond_to do |format|

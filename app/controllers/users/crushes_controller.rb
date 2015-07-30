@@ -1,7 +1,7 @@
 class Users::CrushesController < ApplicationController
   # /users/:user_id/crushes
 
-  # before_action :get_crush, only: [:show, :edit, :update, :destroy]
+  before_action :get_crush, only: [:destroy]
   before_action :assign_user, only: [:create,:new]
 
   def index
@@ -26,6 +26,11 @@ class Users::CrushesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @crush.destroy
+    redirect_to user_crushes_path
   end
 
   def get_crush

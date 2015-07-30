@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-lg-12">
         <h3 class="panel-title">Title</h3>
-        <%= link_to crush.title, user_crushes_path(crush.user_id,crush) %>
+        <%= link_to crush.title, user_crush_path(crush.user_id,crush) %>
       </div>
     </div>
 
@@ -24,6 +24,8 @@
     </div>
 
     <%= link_to "Crush This", like_crush_path(crush), method: :put, class: 'btn btn-primary' %>
+
+    <%= link_to "Delete", user_crush_path(crush.user_id,crush), method: :delete, data: { confirm: 'Are you sure?' } %>
 
     <div class="row">
       <div class="col-lg-12">
@@ -38,9 +40,7 @@
           </div>
       </div>
     </div>
-    
-    <%#= link_to "Downvote", dislike_crush_path(crush), method: :put %>
-
     <% end %>
+    <%= link_to "New Crush", new_user_crush_path, class: 'btn btn-primary' %>
   </div>
 </div>

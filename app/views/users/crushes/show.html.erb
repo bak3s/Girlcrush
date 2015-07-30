@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-lg-12">
-        <%= image_tag @crush.picture.url(:medium) %>
+        <%= image_tag @crush.picture.url(:full), class: 'img-responsive' %>
       </div>
     </div>
     <div class="row">
@@ -20,22 +20,30 @@
         <% built_url = @crush.build_url %>
         <% location = @crush.process_url(built_url) %>
         <% latlng = @crush.show_places(location) %>
-        <%= latlng[0][:lat] %>
-        <%= latlng[0][:lng] %>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-12">
-        <%= @crush.votes_for.size %>
+        <div class="well">
+        <button class="btn btn-primary" type="button">
+          Crushes <span class="badge"><%= @crush.votes_for.size %></span>
+        </button> 
+        <%= link_to "Crush This", like_crush_path(@crush), method: :put, class: 'btn btn-primary' %>
+        </div>
+
       </div>
     </div>
 
-    <%= link_to "Crush This", like_crush_path(@crush), method: :put, class: 'btn btn-primary' %>
+    <div class="acf-map col-lg-12" style="height:250px;">
+      <div class="marker" data-lat="<%= latlng[0][:lat] %>" data-lng="<%= latlng[0][:lng] %>"></div>
+    </div>
 
     <div class="row">
       <div class="col-lg-12">
+        <hr />
         <h3 class="panel-title">Crushed by</h3>
+        <br />
           <div class="list-group">
           <% @crush.votes_for.voters.each do |p| %>
             <a class="list-group-item" href="<%= profile_path(p.profile.user_id) %>">

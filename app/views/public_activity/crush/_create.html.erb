@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  <div class="list-group-item"><%= link_to activity.trackable.title, activity.trackable %>, has been created</li>
+<% else %>
+  <!--<div class="list-group-item">This item has been removed</li>-->
+<% end %>
